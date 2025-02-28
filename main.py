@@ -1,7 +1,12 @@
 import telebot
+import json
 
-BOT_TOKEN = ''
-ADMIN_USER_IDS = []
+# Загружаем конфигурацию из JSON-файла
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
+BOT_TOKEN = config['bot_token']
+ADMIN_USER_IDS = config['admin_user_ids']
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -43,11 +48,11 @@ def handle_approval(call):
     if action == 'approve':
         bot.send_message(user_id, f"Ваше предложение было одобрено:\n\n{text}")
         for admin_id in ADMIN_USER_IDS:
-            bot.send_message(admin_id, f"Предложение было одобрено:\n\n{text}")
+            bot.send_message(admin_id, f"Предложение одобрено:\n\n{text}")
     else:
         bot.send_message(user_id, f"Ваше предложение было отклонено:\n\n{text}")
         for admin_id in ADMIN_USER_IDS:
-            bot.send_message(admin_id, f"Предложение было отклонено:\n\n{text}")
+            bot.send_message(admin_id, f"Предложение отклонено:\n\n{text}")
 
     del proposals[message_id]
 
