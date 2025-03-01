@@ -4,7 +4,8 @@
 ```
 {
     "bot_token": "TOKEN",
-    "admin_user_ids": [ID_1, ID_2]
+    "admin_user_ids": [ID_1, ID_2],
+    "channel_id": -100...
 }
 ```
 Айдишников администраторов может быть 1 или больше.
